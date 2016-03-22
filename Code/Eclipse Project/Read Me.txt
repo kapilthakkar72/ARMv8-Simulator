@@ -1,0 +1,6 @@
+Instruction to run file:
+1. Open Command promt.
+2. Go to project's bin folder.
+3. Run java ARMv8Simulator <object filename>
+
+Note:- Object file needs to be placed in bin folder.

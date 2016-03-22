@@ -1,0 +1,54 @@
+The .s file
+
+.global _start
+
+_start:
+mov w1,#10
+mov w2,#20
+add w3,w1,w2
+
+objdump
+
+test1:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+0000000000000000 <_start>:
+   0:	52800141 	mov	w1, #0xa                   	// #10
+   4:	52800282 	mov	w2, #0x14                  	// #20
+   8:	0b020023 	add	w3, w1, w2
+hduser@bt:~/gcc-linaro-aarch64-linux-gnu-4.9-2014
+
+
+
+The instruction mov w1,#0xa
+
+52800141
+
+Section c.6.6.123 page 613
+
+0    10    100101    00  0000000000001010          00001
+sf   opc             hw   immediate val 10         Rd(destination)
+
+
+52800282
+
+
+0    10    100101    00  0000000000010100          00002
+sf   opc             hw   immediate val 20         Rd(destination)
+
+
+
+Add
+
+0b020023
+
+section c.6.6.5 page 410
+
+0    0    0    01011     00       0   00010    000000   00001   00011
+sf   op   s              shift        Rm       imm6     Rn      Rd
+
+Rd = Rn + shift(Rm, amount)
+w3 = w1 + 0(w2, 0)
+w3 = w1 + w2
